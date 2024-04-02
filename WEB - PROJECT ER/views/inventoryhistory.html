@@ -1,0 +1,52 @@
+<div class="container-fluid">
+
+    <div class="d-flex align-items-start justify-content-between mb-4">
+        <h1 class="h3 mb-2 text-gray-800">Inventory History</h1>
+    
+        <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" >
+            <div class="input-group">
+                <input type="text" class="form-control bg-light border-0 small" placeholder="Search for commit..."
+                    aria-label="Search" aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="button">
+                        <i class="fas fa-search fa-sm"></i>
+                    </button>
+                </div>
+            </div>
+        </form>
+    
+        
+    </div>
+
+    <!-- DataTales Example -->
+    <div class="container-fluid">
+      <!-- Inventory History Table -->
+      <div class="card shadow mb-4">
+          <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">Inventory History</h6>
+          </div>
+          <div class="card-body">
+              <div class="table-responsive">
+                  <table class="table table-bordered" id="inventoryHistoryTable" width="100%" cellspacing="0">
+                      <thead>
+                          <tr>
+                              <th>Commit ID</th>
+                              <th>Committee</th>
+                              <th>Product</th>
+                              <th>Description</th>
+                              <th>Picture</th>
+                              <th>Date</th>
+                              <th>Time</th>
+                              <th>Reason for Updating</th>
+                          </tr>
+                      </thead>
+                      <tbody id="inventoryHistoryTableBody">
+                          <!-- Table rows will be dynamically added here -->
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+      </div>
+  </div>
+
+</div>
