@@ -1,0 +1,205 @@
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-4 text-gray-800">Outgoing Shipment</h1>
+
+    <div class="row">
+
+        <div class="col-lg-6">
+
+           
+
+            <!-- Brand Buttons -->
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">How to use ?</h6>
+                </div>
+                <div class="card-body">
+                    <p style="color: #4e73df;">If you want to remove a product from the inventory, you can do so after checking the checkbox on top of the form. 
+                        Different Form will open and it will allow you to remove your product.
+                    </p>
+                    <p style="color: #4e73df;">It is not your responsibility to subtract the current inventory with the new shipment, just to input number of units
+                        of product that are abandoning the inventory. Rest will be taken care of by the system.
+                    </p>
+                    <p style="color: #4e73df;">It is not your responsibility to subtract the current inventory with the new shipment, just to input number of units
+                      of product that are abandoning the inventory. Rest will be taken care of by the system.
+                    </p>
+                    <p style="color: #4e73df;">It is not your responsibility to subtract the current inventory with the new shipment, just to input number of units
+                    of product that are abandoning the inventory. Rest will be taken care of by the system.
+                    </p>
+                    <strong style="text-align: center; color: #4e73df;">Maybe you are on the wrong page ?</strong>
+                    <br><br>
+                    <a href="#checkavailability" class="btn btn-google btn-block"><i class="fab fa-google fa-fw"></i>
+                        Check Availability</a>
+                    <a href="#outgoingshipment" class="btn btn-facebook btn-block"><i
+                            class="fab fa-facebook-f fa-fw"></i> Incoming Shipment</a>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-lg-6">
+
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Remove or decrease products quantity</h6>
+                </div>
+                <div class="card-body">
+                  <form class="row g-3" id="shipmentForm">
+                    <div class="col-12">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="gridCheck">
+                            <label class="form-check-label" for="gridCheck">
+                                <strong style="color: #4e73df;">REMOVE PRODUCT</strong>
+                                <br>
+                                <br>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="productID" class="form-label">Product ID</label>
+                        <input type="text" class="form-control" id="productID" name="productID">
+                        <br>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="confirmProductID" class="form-label">Confirm Product ID</label>
+                        <input type="text" class="form-control" id="confirmProductID" name="confirmProductID">
+                        <br>
+                    </div>
+                    <div class="col-12">
+                        <label for="category" class="form-label">Category</label>
+                        <input type="text" class="form-control" id="category" name="category" placeholder="Smartphone">
+                        <br>
+                    </div>
+                    <div class="col-12">
+                        <label for="shipmentUnits" class="form-label">Number of units in shipment</label>
+                        <input type="text" class="form-control" id="shipmentUnits" name="shipmentUnits" placeholder="50">
+                        <br>
+                    </div>
+                    <div class="col-12">
+                        <label for="reason" class="form-label">Reason for updating</label>
+                        <input type="text" class="form-control" id="reason" name="reason" placeholder="Shipment to Germany">
+                        <br>
+                    </div>
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-primary">Update</button>
+                    </div>
+                  </form>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Updated products</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                          <th>ProductID</th>
+                          <th>ProductName</th>
+                          <th>Picture</th>
+                          <th>Category</th>
+                          <th>Brand</th>
+                          <th>Model</th>
+                          <th>Price</th>
+                          <th>StockQuantity</th>
+                          <th>ReleaseDate</th>
+                          <th>WarrantyDuration</th>
+                          <th>Description</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <!-- Product 1001 -->
+                        <tr>
+                          <td>1001</td>
+                          <td><a href="#product">Smart TV 4K</a></td>
+                          <td><img src="img/samsungtv4k.webp" alt="Smart TV 4K" width="70" height="70"></td>
+                          <td>Television</td>
+                          <td>Samsung</td>
+                          <td>QLED 55-inch</td>
+                          <td>$799.99</td>
+                          <td>50</td>
+                          <td>2023-01-15</td>
+                          <td>2 years</td>
+                          <td>4K UHD, Smart TV with voice control</td>
+                        </tr>
+                        
+                        
+                        <tr>
+                            <td>1004</td>
+                            <td>Gaming Console</td>
+                            <td><img src="img/ps5.jpeg" alt="Gaming Console" width="70" height="70"></td>
+                            <td>Gaming</td>
+                            <td>Sony</td>
+                            <td>PlayStation 5</td>
+                            <td>$499.99</td>
+                            <td>20</td>
+                            <td>2020-11-12</td>
+                            <td>1 year</td>
+                            <td>4K gaming, Ultra HD Blu-ray</td>
+                        </tr>
+                        
+                        <tr>
+                            <td>1006</td>
+                            <td>Digital Camera</td>
+                            <td><img src="img/nikoncamera.jpeg" alt="Digital Camera" width="70" height="70"></td>
+                            <td>Photography</td>
+                            <td>Nikon</td>
+                            <td>D850</td>
+                            <td>$2499.99</td>
+                            <td>15</td>
+                            <td>2021-05-20</td>
+                            <td>2 years</td>
+                            <td>45.7MP, 4K UHD recording</td>
+                        </tr>
+
+                        <tr>
+                            <td>1002</td>
+                            <td>Laptop - Ultrabook</td>
+                            <td><img src="img/dell_ultrabook.webp" alt="Laptop - Ultrabook" width="70" height="70"></td>
+                            <td>Laptop</td>
+                            <td>Dell</td>
+                            <td>XPS 13</td>
+                            <td>$1299.99</td>
+                            <td>30</td>
+                            <td>2023-02-10</td>
+                            <td>1 year</td>
+                            <td>13-inch, Core i7, 16GB RAM, 512GB SSD</td>
+                        </tr>
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script>
+  document.getElementById('shipmentForm').addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent form submission
+
+      // Fetch input values
+      const productID = document.getElementById('productID').value;
+      const confirmProductID = document.getElementById('confirmProductID').value;
+      const category = document.getElementById('category').value;
+      const shipmentUnits = document.getElementById('shipmentUnits').value;
+      const reason = document.getElementById('reason').value;
+
+      // Log inputs to console
+      console.log('Product ID:', productID);
+      console.log('Confirm Product ID:', confirmProductID);
+      console.log('Category:', category);
+      console.log('Number of units in shipment:', shipmentUnits);
+      console.log('Reason for updating:', reason);
+
+      // You can add your validation logic here
+  });
+</script>
+</body>
+</html>

@@ -11,8 +11,10 @@
 
     <title>IMS</title>
 
-    <!-- Custom fonts for this template-->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    
+
+    
+
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
@@ -20,33 +22,177 @@
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
 
+
+    <link rel="stylesheet" href="css/profile.css">
+
+    <link rel="stylesheet" href="css/team.css">
+
+    <!-- spapp style -->
+    <link rel="stylesheet" href="css/spapp.css" />
+
+    <!-- spapp scripts -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.spapp.min.js">
+    </script>
+    <script src="js/script.js"></script>
+
+    
+    
+
+
+    <!-- Inventory Script -->
+    <script>
+
+        document.addEventListener("DOMContentLoaded", function () {
+            // Fetch data from JSON file
+            fetch("json/inventory.json")
+                .then(response => response.json())
+                .then(data => {
+                    const tableBody = document.getElementById('productTableBody');
+                
+                    // Loop through each product in the JSON data
+                    data.Inventory.forEach(product => {
+                        const newRow = tableBody.insertRow(); // Insert a new row into the table
+                    
+                        // Loop through each property of the product
+                        Object.entries(product).forEach(([key, value]) => {
+                            const cell = newRow.insertCell(); // Insert a new cell into the row
+                        
+                            if (key === 'Picture') {
+                                // Create an <img> element for the picture
+                                const img = document.createElement('img');
+                                img.src = value; // Set the src attribute to the image link
+                                img.alt = product.ProductName; // Set alt text for accessibility
+                                img.width = 70; // Set width (adjust as needed)
+                                img.height = 70; // Set height (adjust as needed)
+                                cell.appendChild(img); // Append the <img> element to the cell
+                            } else {
+                                // For non-picture attributes, display the value as text
+                                cell.textContent = value;
+                            }
+                        });
+                    });
+                })
+                .catch(error => console.error('Error fetching data:', error));
+        });
+    
+    </script>
+
+    <!-- Inventory History script -->
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        fetch('json/inventoryhistory.json')
+            .then(response => response.json())
+            .then(data => {
+                const tableBody = document.getElementById('inventoryHistoryTableBody');
+
+                data['Inventory History'].forEach(item => {
+                    const newRow = tableBody.insertRow();
+
+                    Object.values(item).forEach(value => {
+                        const cell = newRow.insertCell();
+                        // Check if the value is for the Picture column
+                        if (value.startsWith('img/')) {
+                            const img = document.createElement('img');
+                            img.src = value;
+                            img.alt = 'Product Image';
+                            img.width = 70;
+                            img.height = 70;
+                            cell.appendChild(img);
+                        } else {
+                            cell.textContent = value;
+                        }
+                    });
+                });
+            })
+            .catch(error => console.error('Error fetching data:', error));
+    });
+    </script>
+
+    <!-- Short Inventory Script -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+    // Fetch data from JSON file
+    fetch('json/inventory.json')
+        .then(response => response.json())
+        .then(data => {
+            const tableBody = document.getElementById('dataTableBody'); // Get the table body element
+            const limit = 5; // Limit the number of products to 5
+
+            // Loop through each product in the JSON data, up to the limit
+            data.Inventory.slice(0, limit).forEach(product => {
+                const newRow = tableBody.insertRow(); // Insert a new row into the table
+
+                // Create cells for ProductID, ProductName, and StockQuantity
+                const productIdCell = newRow.insertCell(); 
+                productIdCell.textContent = product.ProductID;
+
+                const productNameCell = newRow.insertCell(); 
+                productNameCell.textContent = product.ProductName;
+
+                const stockQuantityCell = newRow.insertCell(); 
+                stockQuantityCell.textContent = product.StockQuantity;
+            });
+        })
+        .catch(error => console.error('Error fetching data:', error));
+});
+
+    </script>
+
+    <!-- Short Inventory History Script -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+    // Fetch data for Inventory History Table
+    fetch("json/inventoryhistory.json")
+        .then(response => response.json())
+        .then(data => {
+            const historyTableBody = document.getElementById('historyTableBody');
+            const limit = 5;
+
+            for (let i = 0; i < Math.min(data['Inventory History'].length, limit); i++) {
+                const entry = data['Inventory History'][i];
+                const newRow = historyTableBody.insertRow();
+
+                const commitIDCell = newRow.insertCell();
+                commitIDCell.textContent = entry['Commit ID'];
+
+                const productCell = newRow.insertCell();
+                productCell.textContent = entry.Product;
+
+                const dateCell = newRow.insertCell();
+                dateCell.textContent = entry.Date;
+            }
+        })
+        .catch(error => console.error('Error fetching inventory history data:', error));
+});
+
+    </script>
+    
+    
+
 </head>
 
-<body id="page-top">
+
+<body id="page-top" style="margin-top: 0;">
 
     <!-- Page Wrapper -->
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar" >
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
                 <div class="sidebar-brand-icon">
-                    <img src = "img/noun-inventory-6657890.svg" alt = "ICON" width = "50" height="50">
+                    <img src = "img/IMS-sidebar-white.png" alt = "ICON" style="width: 30%; height: 30%;">
                 </div>
-                <div class="sidebar-brand-text mx-3">IMS</div>
+                
             </a>
 
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
 
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
-                <a class="nav-link" href="index.html">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
-            </li>
+        
 
             <!-- Divider -->
             <hr class="sidebar-divider">
@@ -58,7 +204,7 @@
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="inventory.html">
+                <a class="nav-link collapsed" href="#inventory">
                     <i class="fas fa-fw fa-cog"></i>
                     <span>Inventory</span>
                 </a>
@@ -67,11 +213,18 @@
 
             <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="inventoryhistory.html">
+                <a class="nav-link collapsed" href="#inventoryhistory">
                     <i class="fas fa-fw fa-wrench"></i>
                     <span>Inventory History</span>
                 </a>
         
+            </li>
+
+            <!-- Nav Item - Tables -->
+            <li class="nav-item">
+                <a class="nav-link" href="#checkavailability">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Check Availability</span></a>
             </li>
 
             <!-- Divider -->
@@ -79,12 +232,12 @@
 
             <!-- Heading -->
             <div class="sidebar-heading">
-                Functionalities
+                Shipments
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="incomingshipment.html">
+                <a class="nav-link collapsed" href="#incomingshipment">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Incoming Shipment</span>
                 </a>
@@ -93,17 +246,12 @@
 
             <!-- Nav Item - Charts -->
             <li class="nav-item">
-                <a class="nav-link" href="outgoingshipment.html">
+                <a class="nav-link" href="#outgoingshipment">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Outgoing Shipment</span></a>
             </li>
 
-            <!-- Nav Item - Tables -->
-            <li class="nav-item">
-                <a class="nav-link" href="checkavailability.html">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Check Availability</span></a>
-            </li>
+            
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
@@ -129,19 +277,7 @@
                         <i class="fa fa-bars"></i>
                     </button>
 
-                    <!-- Topbar Search -->
-                    <form
-                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                        <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                                aria-label="Search" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="button">
-                                    <i class="fas fa-search fa-sm"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+                    
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -152,11 +288,10 @@
 
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link dropdown-toggle" href="profile.html" id="userDropdown" role="button"
+                            <a class="nav-link dropdown-toggle" href="#profilewithteamsection" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">John Doe</span>
-                                <img class="img-profile rounded-circle"
-                                    src="img/profilepic.avif" style="height: 30px; width: 30px;">
+                                <img src="/WEB/WEB - PROJECT ER/img/pp.webp" class="img-fluid avatar-xxl rounded-circle" style="height: 40px; width: 40px;">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -186,281 +321,22 @@
                 </nav>
                 <!-- End of Topbar -->
 
-                <!-- Begin Page Content -->
-                <div class="container-fluid">
 
-                    <!-- Page Heading -->
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
-                    </div>
-
-                    
-
-
-                    <!-- Content Row -->
-
-                    <div class="row">
-
-                        <!-- Area Chart -->
-                        <div class="col-xl-8 col-lg-7">
-                            <div class="card shadow mb-4">
-                                <!-- Card Header - Dropdown -->
-                                <div
-                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary"><a href="inventory.html">Inventory</a></h6>
-                                    
-                                
-                                </div>
-                                <!-- Card Body -->
-                                <div class="card-body">
-                                    <div class="chart-area">
-                                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                            <thead>
-                                                <tr>
-                                                  <th>ProductID</th>
-                                                  <th>ProductName</th>
-                                                  <th>StockQuantity</th>
-                                                </tr>
-                                              </thead>
-                                              <tbody>
-                                                <!-- Product 1001 -->
-                                                <tr>
-                                                  <td>1001</td>
-                                                  <td>Smart TV 4K</td>
-                                                  <td>50</td>
-                                                </tr>
-    
-                                                <tr>
-                                                    <td>1002</td>
-                                                    <td>Laptop - Ultrabook</td>
-                                                    <td>30</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>1003</td>
-                                                    <td>Smartphone - Flagship</td>
-                                                    <td>75</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>1004</td>
-                                                    <td>Gaming Console</td>
-                                                    <td>20</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>1005</td>
-                                                    <td>Wireless Earbuds</td>
-                                                    <td>40</td>
-                                                </tr>
-                                               
-                                              </tbody>
-                                        </table>\
-                                        <canvas id="myAreaChart"></canvas>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- History -->
-                        <div class="col-xl-4 col-lg-5">
-                            <div class="card shadow mb-4">
-                                <!-- Card Header - Dropdown -->
-                                <div
-                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between" >
-                                    <h6 class="m-0 font-weight-bold text-primary"><a href="inventoryhistory.html">Inventory History</a></h6>
-                                    <div class="dropdown no-arrow">
-                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                                        </a>
-                                        
-                                    </div>
-                                </div>
-                                <!-- Card Body -->
-                                <div class="card-body">
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                            <thead>
-                                              <tr>
-                                                <th>Commitee</th>
-                                                <th>Product</th>
-                                                <th>Description</th>
-                                              </tr>
-                                            </thead>
-                                            <tbody>
-                                              <!-- Entry 1 -->
-                                              <tr>
-                                                <td>John Doe</td>
-                                                <td>Smart TV 4K</td>
-                                                <td>Updated quantity to 45 units</td>
-                                              </tr>
-                                        
-                                              <!-- Entry 2 -->
-                                              <tr>
-                                                <td>Alice Smith</td>
-                                                <td>Laptop - Ultrabook</td>
-                                                <td>Decreased quantity to 25 units</td>
-                                              </tr>
-                                        
-                                              <!-- Entry 3 -->
-                                              <tr>
-                                                <td>Bob Johnson</td>
-                                                <td>Wireless Earbuds</td>
-                                                <td>Increased quantity to 50 units</td>
-                                              </tr>
-                                            </tbody>
-                                          </table>
-                                    </div>
-                                    
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Content Row -->
-                    <div class="row">
-
-                        <!-- Content Column -->
-                        <div class="col-lg-6 mb-4">
-
-                            
-
-                            <!-- Color System -->
-                            <div class="row">
-                                <div class="col-lg-6 mb-4">
-                                    <div class="card bg-primary text-white shadow">
-                                        <div class="card-body">
-                                            <a href="#" style="color: aliceblue;">TV</a>
-                                            <div class="text-white-50 small">#4e73df</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 mb-4">
-                                    <div class="card bg-success text-white shadow">
-                                        <div class="card-body">
-                                            <a href="#" style="color: aliceblue;">Smartphone</a>
-                                            <div class="text-white-50 small">#1cc88a</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 mb-4">
-                                    <div class="card bg-info text-white shadow">
-                                        <div class="card-body" >
-                                            <a href="#" style="color: aliceblue;">Headphone</a>
-                                            <div class="text-white-50 small">#36b9cc</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 mb-4">
-                                    <div class="card bg-warning text-white shadow">
-                                        <div class="card-body">
-                                            <a href="#" style="color: aliceblue;">Earbud</a>
-                                            <div class="text-white-50 small">#f6c23e</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 mb-4">
-                                    <div class="card bg-danger text-white shadow">
-                                        <div class="card-body">
-                                            <a href="#" style="color: aliceblue;">Laptop</a>
-                                            <div class="text-white-50 small">#e74a3b</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 mb-4">
-                                    <div class="card bg-secondary text-white shadow">
-                                        <div class="card-body">
-                                            <a href="#" style="color: aliceblue;">Computer</a>
-                                            <div class="text-white-50 small">#858796</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 mb-4">
-                                    <div class="card bg-primary text-black shadow">
-                                        <div class="card-body">
-                                            <a href="#" style="color: aliceblue;">Projector</a>
-                                            <div class="text-black-50 small">#f8f6fc</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 mb-4">
-                                    <div class="card bg-dark text-white shadow">
-                                        <div class="card-body">
-                                            <a href="#" style="color: aliceblue;">VR</a>
-                                            <div class="text-white-50 small">#5a5c69</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 mb-4">
-                                    <div class="card bg-success text-white shadow">
-                                        <div class="card-body">
-                                            <a href="#" style="color: aliceblue;">AC</a>
-                                            <div class="text-white-50 small">#5a5c69</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 mb-4">
-                                    <div class="card bg-warning text-white shadow">
-                                        <div class="card-body">
-                                            <a href="#" style="color: aliceblue;">Chargers</a>
-                                            <div class="text-white-50 small">#5a5c69</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 mb-4">
-                                    <div class="card bg-danger text-white shadow">
-                                        <div class="card-body">
-                                            <a href="#" style="color: aliceblue;">Dishwasher</a>
-                                            <div class="text-white-50 small">#5a5c69</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 mb-4">
-                                    <div class="card bg-dark text-white shadow">
-                                        <div class="card-body">
-                                            <a href="#" style="color: aliceblue;">Smart Vacuum</a>
-                                            <div class="text-white-50 small">#5a5c69</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                            </div>
-
-                        </div>
-
-                        <div class="col-lg-6 mb-4">
-
-                            <!-- Illustrations -->
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Welcome</h6>
-                                </div>
-                                <div class="card-body">
-                                    <div class="text-center">
-                                        <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;"
-                                            src="img/dashboard_task_picture.svg" alt="...">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Approach -->
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Take Responsibility</h6>
-                                </div>
-                                <div class="card-body">
-                                    <p>IMS keeps track of all the actions being performed by each author. When updating the inventory, adding or removing 
-                                        items, changing quantity or doing any other work, take responsibility.
-                                    </p>
-                                    <p class="mb-0">Before working on this platform you should be properly educated on how to use the IMS.</p>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-
-                </div>
-                <!-- /.container-fluid -->
+                <section  id="pageContent">
+                    <main id="spapp" role="main">
+                        <section id="home" data-load="home.html"></section>
+                        <section id="inventory" data-load="inventory.html"></section>
+                        <section id="inventoryhistory" data-load="inventoryhistory.html"></section>
+                        <section id="incomingshipment" data-load="incomingshipment.html"></section>
+                        <section id="outgoingshipment" data-load="outgoingshipment.html"></section>
+                        <section id="checkavailability" data-load="checkavailability.html"></section>
+                        <section id="404" data-load="404.html"></section>
+                        <section id="product" data-load="product.html"></section>
+                        <section id="profile" data-load="profile.html"></section>
+                        <section id="profilewithteamsection" data-load="profilewithteamsection.html"></section>
+                        
+                    </main>
+                </section>
 
             </div>
             <!-- End of Main Content -->
@@ -481,9 +357,16 @@
     </div>
     <!-- End of Page Wrapper -->
 
-    
-
-    
+    <!-- spapp script section -->
+    <script>
+        var app = $.spapp({
+          defaultView: "#home",
+          templateDir: "./views/",
+        });
+  
+        app.run();
+      </script>
+    <!-- end of spapp script section -->
 
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
@@ -501,6 +384,10 @@
     <!-- Page level custom scripts -->
     <script src="js/demo/chart-area-demo.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>
+
+
+    
+    
 
 </body>
 

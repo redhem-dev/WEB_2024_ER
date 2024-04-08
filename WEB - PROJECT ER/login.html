@@ -38,7 +38,7 @@
                                 <div class="text-center">
                                     <h1 class="h4 text-gray-900 mb-4">Welcome Back To IMS!</h1>
                                 </div>
-                                <form class="user">
+                                <form class="user" onsubmit="return validateForm()">
                                     <div class="form-group">
                                         <input type="email" class="form-control form-control-user"
                                             id="exampleInputEmail" aria-describedby="emailHelp"
@@ -55,9 +55,9 @@
                                                 Me</label>
                                         </div>
                                     </div>
-                                    <a href="index.html" class="btn btn-primary btn-user btn-block">
+                                    <button type="submit" class="btn btn-primary btn-user btn-block">
                                         Login
-                                    </a>
+                                    </button>
                                     <hr>
                                     <a href="index.html" class="btn btn-google btn-user btn-block">
                                         <i class="fab fa-google fa-fw"></i> Login with Google
@@ -98,6 +98,31 @@
 
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
+
+    <script>
+        function validateForm() {
+            var email = document.getElementById("exampleInputEmail").value;
+            var password = document.getElementById("exampleInputPassword").value;
+
+            // Simple validation for demonstration (you can expand it as needed)
+            if (!email.trim()) {
+                console.error("Email address is required.");
+                return false;
+            }
+
+            if (!password.trim()) {
+                console.error("Password is required.");
+                return false;
+            }
+
+            // Print form inputs to console
+            console.log("Email:", email);
+            console.log("Password:", password);
+
+            // Prevent form submission (default action)
+            return false;
+        }
+    </script>
 
 </body>
 
