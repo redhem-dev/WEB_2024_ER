@@ -9,7 +9,7 @@
 
            
 
-            <!-- Brand Buttons -->
+            <!-- Explanation -->
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
                     <h6 class="m-0 font-weight-bold text-primary">How to use ?</h6>
@@ -43,26 +43,27 @@
 
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Remove or decrease products quantity</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Remove product or decrease products quantity</h6>
                 </div>
                 <div class="card-body">
-                  <form class="row g-3" id="shipmentForm">
-                    <div class="col-12">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="gridCheck">
-                            <label class="form-check-label" for="gridCheck">
-                                <strong style="color: #4e73df;">REMOVE PRODUCT</strong>
-                                <br>
-                                <br>
-                            </label>
-                        </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="toggleNewProduct">
+                        <label class="form-check-label" for="toggleNewProduct">
+                            <strong style="color: #4e73df;">REMOVE PRODUCT</strong>
+                            <br><br>
+                        </label>
                     </div>
-                    <div class="col-md-6">
+
+                    <!-- Form to decrease product quantity-->
+                    <form class="row g-3" id="decreasingProductQuantity">
+                    
+                    <div class="col-12">
                         <label for="productID" class="form-label">Product ID</label>
                         <input type="text" class="form-control" id="productID" name="productID">
                         <br>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-12">
                         <label for="confirmProductID" class="form-label">Confirm Product ID</label>
                         <input type="text" class="form-control" id="confirmProductID" name="confirmProductID">
                         <br>
@@ -85,7 +86,29 @@
                     <div class="col-12">
                         <button type="submit" class="btn btn-primary">Update</button>
                     </div>
-                  </form>
+                    </form>
+                    <!-- Form to remove product-->
+                    <form class="row g-3" id="removingProduct" style="display: none;">
+                        <div class="col-12">
+                            <label for="productID2" class="form-label">Product ID</label>
+                            <input type="text" class="form-control" id="productID2" name="productID2">
+                            <br>
+                        </div>
+                        <div class="col-12">
+                            <label for="confirmProductID" class="form-label">Confirm Product ID</label>
+                            <input type="text" class="form-control" id="confirmProductID2" name="confirmProductID2">
+                            <br>
+                        </div>
+                        <div class="col-12">
+                            <label for="reason2" class="form-label">Reason for removing</label>
+                            <input type="text" class="form-control" id="reason2" name="reason2" placeholder="Production stop...">
+                            <br>
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary">Update</button>
+                        </div>
+                    </form>
+                    
                 </div>
             </div>
 
@@ -180,6 +203,10 @@
     </div>
 
 </div>
+
+
+
+<!-- Script for validation of form submission when reducing quantity-->
 <script>
   document.getElementById('shipmentForm').addEventListener('submit', function(event) {
       event.preventDefault(); // Prevent form submission
@@ -201,5 +228,64 @@
       // You can add your validation logic here
   });
 </script>
+
+
+<!-- Script for validation of form submission when removing product-->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('removingProduct').addEventListener('submit', function(event) {
+            event.preventDefault();  // Prevent the form from submitting to see the console output
+    
+            // Retrieve values from the form
+            const productID = document.getElementById('productID2').value.trim();
+            const confirmProductID2 = document.getElementById('confirmProductID2').value.trim();
+            const reason = document.getElementById('reason2').value.trim();
+    
+            // Print each field value to the console
+            console.log('Product ID:', productID);
+            console.log('Confirm Product ID:', confirmProductID2);
+            console.log('Reason for removing:', reason);
+    
+            // Check if all fields are filled
+            if (!productID || !confirmProductID2 || !reason) {
+                console.log('Error: All fields must be filled.');
+                alert('Please fill in all fields.');
+                return; // Stop the submission of the form
+            }
+    
+            // Check if the product IDs match
+            if (productID !== confirmProductID2) {
+                console.log('Error: Product IDs do not match.');
+                alert('The Product IDs do not match.');
+                return; // Stop the submission of the form
+            }
+    
+            // If all checks pass, log that the form is valid and can be submitted
+            console.log('Form is valid. Processing form submission...');
+            // this.submit(); // Uncomment this line if you decide to actually submit the form after validation
+        });
+    });
+</script>
+    
+
+<!-- Script for toggling between the two forms -->
+<script>
+    document.getElementById('toggleNewProduct').addEventListener('change', function() {
+        if (!this.checked) {
+            
+            
+            document.getElementById('removingProduct').style.display = 'none';
+            document.getElementById('decreasingProductQuantity').style.display = 'block';
+
+                       
+
+        } else {
+            document.getElementById('decreasingProductQuantity').style.display = 'none';
+            document.getElementById('removingProduct').style.display = 'block';
+        }
+    });
+</script>
+    
+
 </body>
 </html>

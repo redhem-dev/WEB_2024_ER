@@ -9,7 +9,7 @@
 
             
 
-            <!-- Brand Buttons -->
+            <!-- Explanation -->
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
                     <h6 class="m-0 font-weight-bold text-primary">How to use ?</h6>
@@ -43,30 +43,26 @@
                     <h6 class="m-0 font-weight-bold text-primary">Import or add a product</h6>
                 </div>
                 <div class="card-body">
-                    <form class="row g-3" id="updateForm">
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="toggleNewProduct">
+                        <label class="form-check-label" for="toggleNewProduct">
+                            <strong style="color: #4e73df;">NEW PRODUCT</strong>
+                            <br><br>
+                        </label>
+                    </div>
+
+                    <!--Form for updating product-->
+                    <form class="row g-3" id="stockForm">
+                        
                         <div class="col-12">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="gridCheck">
-                                <label class="form-check-label" for="gridCheck">
-                                    <strong style="color: #4e73df;">NEW PRODUCT</strong>
-                                    <br>
-                                    <br>
-                                </label>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
                             <label for="productID" class="form-label">Product ID</label>
-                            <input type="text" class="form-control" id="productID" name="productID">
-                            <br>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="confirmProductID" class="form-label">Confirm Product ID</label>
-                            <input type="text" class="form-control" id="confirmProductID" name="confirmProductID">
+                            <input type="text" class="form-control" id="productID" name="productID" placeholder="ID of a product to be updated">
                             <br>
                         </div>
                         <div class="col-12">
-                            <label for="category" class="form-label">Category</label>
-                            <input type="text" class="form-control" id="category" name="category" placeholder="Smartphone">
+                            <label for="confirmProductID" class="form-label">Confirm Product ID</label>
+                            <input type="text" class="form-control" id="confirmProductID" name="confirmProductID" placeholder="Same ID as in previous field">
                             <br>
                         </div>
                         <div class="col-12">
@@ -79,6 +75,75 @@
                             <input type="text" class="form-control" id="reason" name="reason" placeholder="Shipment from China">
                             <br>
                         </div>
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary">Update</button>
+                        </div>
+                    </form>
+                
+                    <!-- Form for adding new product -->
+                    <form class="row g-3" id="newProductForm" style="display: none;">
+                        
+                        
+                        <div class="col-12">
+                            <label for="productName" class="form-label">Product Name</label>
+                            <input type="text" class="form-control" id="productName" name="productName" placeholder="Galaxy S22">
+                            <br>
+                        </div>
+                        <div class="col-12">
+                            <label for="category" class="form-label">Category</label>
+                            <input type="text" class="form-control" id="category" name="category" placeholder="Smartphone">
+                            <br>
+                        </div>
+                        
+                        
+                        <div class="col-12">
+                            <label for="brand" class="form-label">Brand</label>
+                            <input type="text" class="form-control" id="brand" name="brand" placeholder="Samsung">
+                            <br>
+                        </div>
+                        <div class="col-12">
+                            <label for="model" class="form-label">Model</label>
+                            <input type="text" class="form-control" id="model" name="model" placeholder="Samsung Galaxy S22">
+                            <br>
+                        </div>
+                        <div class="col-12">
+                            <label for="price" class="form-label">Price</label>
+                            <input type="text" class="form-control" id="price" name="price" placeholder="999$">
+                            <br>
+                        </div>
+                        <div class="col-12">
+                            <label for="quantity" class="form-label">Quantity</label>
+                            <input type="text" class="form-control" id="quantity" name="quantity" placeholder="50">
+                            <br>
+                        </div>
+                        <div class="col-12">
+                            <label for="releaseDate" class="form-label">Release Date</label>
+                            <input type="text" class="form-control" id="releaseDate" name="releaseDate" placeholder="19.9.2023.">
+                            <br>
+                        </div>
+                        <div class="col-12">
+                            <label for="warrantyDuration" class="form-label">Warranty Duration</label>
+                            <input type="text" class="form-control" id="warrantyDuration" name="warrantyDuration" placeholder="3 years">
+                            <br>
+                        </div>
+                        <div class="col-12">
+                            <label for="description" class="form-label">Description</label>
+                            <input type="text" class="form-control" id="description" name="description" placeholder="Flaship Smartphone from Samsung...">
+                            <br>
+                        </div>
+
+                        
+                        <div class="col-12">
+                            <label for="fileInput" class="form-label">Upload Picture</label>
+                            <div class="file-upload-wrapper" style="position: relative;">
+                                <button type="button" class="btn btn-primary col-md-12" id="uploadButton">Choose File</button>
+                                <input type="file" class="form-control" id="fileInput" name="fileInput" accept=".png" style="display: none;">
+                                <span id="fileName" style="display: block; margin-top: 10px;">No file selected</span>
+
+                            </div>
+                            <br>
+                        </div>
+                        
                         <div class="col-12">
                             <button type="submit" class="btn btn-primary">Update</button>
                         </div>
@@ -176,7 +241,11 @@
             </div>
         </div>
     </div>
+
+    
 </div>
+
+<!-- Script for validation of updating product -->
 <script>
 document.getElementById('updateForm').addEventListener('submit', function(event) {
     event.preventDefault(); // Prevent form submission
@@ -197,4 +266,68 @@ document.getElementById('updateForm').addEventListener('submit', function(event)
 
     // You can add your validation logic here
 });
+</script>
+
+<!-- Script for toggling between the two forms -->
+<script>
+    document.getElementById('toggleNewProduct').addEventListener('change', function() {
+        if (this.checked) {
+            
+            
+            document.getElementById('stockForm').style.display = 'none';
+            document.getElementById('newProductForm').style.display = 'block';
+
+                       
+
+        } else {
+            document.getElementById('newProductForm').style.display = 'none';
+            document.getElementById('stockForm').style.display = 'block';
+        }
+    });
+</script>
+
+
+<!-- Script for validation of new product form -->
+<script>
+    document.getElementById('newProductForm').addEventListener('submit', function(event) {
+    event.preventDefault();  // Prevent the form from submitting to see the console output
+
+    // Log each field value to check what we receive
+    console.log('Product Name:', document.getElementById('productName').value);
+    console.log('Category:', document.getElementById('category').value);
+    console.log('Brand:', document.getElementById('brand').value);
+    console.log('Model:', document.getElementById('model').value);
+    console.log('Price:', document.getElementById('price').value);
+    console.log('Quantity:', document.getElementById('quantity').value);
+    console.log('Release Date:', document.getElementById('releaseDate').value);
+    console.log('Warranty Duration:', document.getElementById('warrantyDuration').value);
+    console.log('Description:', document.getElementById('description').value);
+    const fileInput = document.getElementById('fileInput').files;
+    console.log('File selected:', fileInput.length > 0 ? fileInput[0].name : 'No file selected');
+
+    // Check if any input is empty
+    if (!document.getElementById('productName').value || !document.getElementById('category').value || !document.getElementById('brand').value || !document.getElementById('model').value || !document.getElementById('price').value || !document.getElementById('quantity').value || !document.getElementById('releaseDate').value || !document.getElementById('warrantyDuration').value || !document.getElementById('description').value || fileInput.length === 0) {
+        console.log('Please fill all fields.');
+        return;
+    }
+});
+
+</script>
+  
+<!-- Script for file upload, picture for the new product form-->
+<script>
+
+document.getElementById('uploadButton').addEventListener('click', function() {
+    document.getElementById('fileInput').click();  // Trigger the hidden file input click
+});
+
+document.getElementById('fileInput').addEventListener('change', function() {
+    const fileNameDisplay = document.getElementById('fileName');
+    if (this.files.length > 0) {
+        fileNameDisplay.textContent = this.files[0].name;  // Update the text to show the file name
+    } else {
+        fileNameDisplay.textContent = 'No file selected';  // Reset if no file is selected
+    }
+});
+
 </script>

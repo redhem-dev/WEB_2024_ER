@@ -38,136 +38,6 @@
 
     
     
-
-
-    <!-- Inventory Script -->
-    <script>
-
-        document.addEventListener("DOMContentLoaded", function () {
-            // Fetch data from JSON file
-            fetch("json/inventory.json")
-                .then(response => response.json())
-                .then(data => {
-                    const tableBody = document.getElementById('productTableBody');
-                
-                    // Loop through each product in the JSON data
-                    data.Inventory.forEach(product => {
-                        const newRow = tableBody.insertRow(); // Insert a new row into the table
-                    
-                        // Loop through each property of the product
-                        Object.entries(product).forEach(([key, value]) => {
-                            const cell = newRow.insertCell(); // Insert a new cell into the row
-                        
-                            if (key === 'Picture') {
-                                // Create an <img> element for the picture
-                                const img = document.createElement('img');
-                                img.src = value; // Set the src attribute to the image link
-                                img.alt = product.ProductName; // Set alt text for accessibility
-                                img.width = 70; // Set width (adjust as needed)
-                                img.height = 70; // Set height (adjust as needed)
-                                cell.appendChild(img); // Append the <img> element to the cell
-                            } else {
-                                // For non-picture attributes, display the value as text
-                                cell.textContent = value;
-                            }
-                        });
-                    });
-                })
-                .catch(error => console.error('Error fetching data:', error));
-        });
-    
-    </script>
-
-    <!-- Inventory History script -->
-    <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        fetch('json/inventoryhistory.json')
-            .then(response => response.json())
-            .then(data => {
-                const tableBody = document.getElementById('inventoryHistoryTableBody');
-
-                data['Inventory History'].forEach(item => {
-                    const newRow = tableBody.insertRow();
-
-                    Object.values(item).forEach(value => {
-                        const cell = newRow.insertCell();
-                        // Check if the value is for the Picture column
-                        if (value.startsWith('img/')) {
-                            const img = document.createElement('img');
-                            img.src = value;
-                            img.alt = 'Product Image';
-                            img.width = 70;
-                            img.height = 70;
-                            cell.appendChild(img);
-                        } else {
-                            cell.textContent = value;
-                        }
-                    });
-                });
-            })
-            .catch(error => console.error('Error fetching data:', error));
-    });
-    </script>
-
-    <!-- Short Inventory Script -->
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-    // Fetch data from JSON file
-    fetch('json/inventory.json')
-        .then(response => response.json())
-        .then(data => {
-            const tableBody = document.getElementById('dataTableBody'); // Get the table body element
-            const limit = 5; // Limit the number of products to 5
-
-            // Loop through each product in the JSON data, up to the limit
-            data.Inventory.slice(0, limit).forEach(product => {
-                const newRow = tableBody.insertRow(); // Insert a new row into the table
-
-                // Create cells for ProductID, ProductName, and StockQuantity
-                const productIdCell = newRow.insertCell(); 
-                productIdCell.textContent = product.ProductID;
-
-                const productNameCell = newRow.insertCell(); 
-                productNameCell.textContent = product.ProductName;
-
-                const stockQuantityCell = newRow.insertCell(); 
-                stockQuantityCell.textContent = product.StockQuantity;
-            });
-        })
-        .catch(error => console.error('Error fetching data:', error));
-});
-
-    </script>
-
-    <!-- Short Inventory History Script -->
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-    // Fetch data for Inventory History Table
-    fetch("json/inventoryhistory.json")
-        .then(response => response.json())
-        .then(data => {
-            const historyTableBody = document.getElementById('historyTableBody');
-            const limit = 5;
-
-            for (let i = 0; i < Math.min(data['Inventory History'].length, limit); i++) {
-                const entry = data['Inventory History'][i];
-                const newRow = historyTableBody.insertRow();
-
-                const commitIDCell = newRow.insertCell();
-                commitIDCell.textContent = entry['Commit ID'];
-
-                const productCell = newRow.insertCell();
-                productCell.textContent = entry.Product;
-
-                const dateCell = newRow.insertCell();
-                dateCell.textContent = entry.Date;
-            }
-        })
-        .catch(error => console.error('Error fetching inventory history data:', error));
-});
-
-    </script>
-    
     
 
 </head>
@@ -357,7 +227,6 @@
     </div>
     <!-- End of Page Wrapper -->
 
-    <!-- spapp script section -->
     <script>
         var app = $.spapp({
           defaultView: "#home",
@@ -365,29 +234,8 @@
         });
   
         app.run();
-      </script>
-    <!-- end of spapp script section -->
+    </script>
 
-    <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-
-    <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
-
-    <!-- Page level plugins -->
-    <script src="vendor/chart.js/Chart.min.js"></script>
-
-    <!-- Page level custom scripts -->
-    <script src="js/demo/chart-area-demo.js"></script>
-    <script src="js/demo/chart-pie-demo.js"></script>
-
-
-    
-    
 
 </body>
 

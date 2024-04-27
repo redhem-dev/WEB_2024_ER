@@ -2,7 +2,7 @@
    <div class="row">
       <div class="col-xl-8">
          <div class="card">
-            <div class="card-body pb-0">
+            <div class="card-body pb-4">
                <div class="row align-items-center">
                   <div class="col-md-3">
                      <div class="text-center border-end">
@@ -22,31 +22,12 @@
                         <div class="row my-4">
                            <div class="col-md-12">
                               <div>
-                                 <p class="text-muted mb-2 fw-medium"><i class="mdi mdi-email-outline me-2"></i><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2268434c514a55474e4e516252504d404b410c414d4f">[email&#160;protected]</a></p>
+                                 <p class="text-muted mb-2 fw-medium"><i class="mdi mdi-email-outline me-2"></i>johndoe@ims.business.us</p>
                                  <p class="text-muted fw-medium mb-0"><i class="mdi mdi-phone-in-talk-outline me-2"></i>418-955-4703</p>
                               </div>
                            </div>
                         </div>
-                        <ul class="nav nav-tabs nav-tabs-custom border-bottom-0 mt-3 nav-justfied" role="tablist">
-                           <li class="nav-item" role="presentation">
-                              <a class="nav-link px-4 " href="https://bootdey.com/snippets/view/profile-projects" target="__blank">
-                              <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
-                              <span class="d-none d-sm-block">Projects</span>
-                              </a>
-                           </li>
-                           <li class="nav-item" role="presentation">
-                              <a class="nav-link px-4 " href="https://bootdey.com/snippets/view/profile-task-with-team-cards" target="__blank">
-                              <span class="d-block d-sm-none"><i class="mdi mdi-menu-open"></i></span>
-                              <span class="d-none d-sm-block">Tasks</span>
-                              </a>
-                           </li>
-                           <li class="nav-item" role="presentation">
-                              <a class="nav-link px-4  active" data-bs-toggle="tab" href="#team-tab" role="tab" aria-selected="true">
-                              <span class="d-block d-sm-none"><i class="mdi mdi-account-group-outline"></i></span>
-                              <span class="d-none d-sm-block">Team</span>
-                              </a>
-                           </li>
-                        </ul>
+                        
                      </div>
                   </div>
                </div>
@@ -55,13 +36,98 @@
          <div class="card">
             <div class="tab-content p-4">
                <div class="tab-pane active show" id="team-tab" role="tabpanel">
-                  <h4 class="card-title mb-4">Team</h4>
+                  <h4 class="card-title mb-3">Team</h4>
+
+
+                  <button class="btn btn-primary col-12 my-2" id="addMemberBtn">
+                     <i class="fas fa-user-plus fa-sm text-white-50"></i> Add new member
+                  </button>
+
+                  <form class="row g-3 col-12 my-2" id="addMembersForm" style="display: none;">
+                        
+                     <div id="memberForm">
+                        <label class="my-2" for="emailAddress">Email Address:</label>
+                        <br>
+                        <input class="col-8 my-2 py-1" type="email"  style="border-color:gainsboro; border-radius: 4px; border-style:solid;" id="emailAddress" required>
+                        <button class="btn btn-primary col-8 my-2" style="text-align: center;" onclick="sendEmail()">Send Invitation</button>
+                     </div>
+                       
+                  </form>
+
+
+                  
                   <div class="row">
+                     
+                     
                      <div class="col-xl-4 col-md-6" id="team-1">
                         <div class="card">
-                           <img src="/WEB/WEB - PROJECT ER/img/pp.webp" class="card-img-top" alt="...">
+                           <img src="/WEB/WEB - PROJECT ER/img/teammembers/teammember2.avif" class="card-img-top" alt="...">
                               <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
+                                <h5 class="card-title">Dino Mujkic</h5>
+                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <a href="#" class="btn btn-primary">Go to profile</a>
+                              </div>
+                        </div>
+                     </div>
+                     <div class="col-xl-4 col-md-6" id="team-1">
+                        <div class="card">
+                           <img src="/WEB/WEB - PROJECT ER/img/teammembers/teammember1.jpeg" class="card-img-top" alt="...">
+                              <div class="card-body">
+                                <h5 class="card-title">Zerina Devic</h5>
+                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <a href="#" class="btn btn-primary">Go to profile</a>                              </div>
+                        </div>
+                     </div>
+                     <div class="col-xl-4 col-md-6" id="team-1">
+                        <div class="card">
+                           <img src="/WEB/WEB - PROJECT ER/img/teammembers/teammember3.jpeg" class="card-img-top" alt="...">
+                              <div class="card-body">
+                                <h5 class="card-title">Nikola Rokvic</h5>
+                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <a href="#" class="btn btn-primary">Go to profile</a>                              </div>
+                        </div>
+                     </div>
+                     <div class="col-xl-4 col-md-6" id="team-1">
+                        <div class="card">
+                           <img src="/WEB/WEB - PROJECT ER/img/teammembers/teammember4.jpeg" class="card-img-top" alt="...">
+                              <div class="card-body">
+                                <h5 class="card-title">Marko Livaja</h5>
+                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <a href="#" class="btn btn-primary">Go to profile</a>                              </div>
+                        </div>
+                     </div>
+                     <div class="col-xl-4 col-md-6" id="team-1">
+                        <div class="card">
+                           <img src="/WEB/WEB - PROJECT ER/img/teammembers/teammember5.jpeg" class="card-img-top" alt="...">
+                              <div class="card-body">
+                                <h5 class="card-title">Semir Stilic</h5>
+                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <a href="#" class="btn btn-primary">Go to profile</a>                              </div>
+                        </div>
+                     </div>
+                     <div class="col-xl-4 col-md-6" id="team-1">
+                        <div class="card">
+                           <img src="/WEB/WEB - PROJECT ER/img/teammembers/teammember6.jpeg" class="card-img-top" alt="...">
+                              <div class="card-body">
+                                <h5 class="card-title">Rambo Amadeus</h5>
+                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <a href="#" class="btn btn-primary">Go to profile</a>                              </div>
+                        </div>
+                     </div>
+                     <div class="col-xl-4 col-md-6" id="team-1">
+                        <div class="card">
+                           <img src="/WEB/WEB - PROJECT ER/img/teammembers/teammember7.webp" class="card-img-top" alt="...">
+                              <div class="card-body">
+                                <h5 class="card-title">Luka Bartula</h5>
+                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <a href="#" class="btn btn-primary">Go to profile</a>                              </div>
+                        </div>
+                     </div>
+                     <div class="col-xl-4 col-md-6" id="team-1">
+                        <div class="card">
+                           <img src="/WEB/WEB - PROJECT ER/img/teammembers/teammember8.png" class="card-img-top" alt="...">
+                              <div class="card-body">
+                                <h5 class="card-title">Emina Peljto</h5>
                                 <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                                 <a href="#" class="btn btn-primary">Go somewhere</a>
                               </div>
@@ -69,59 +135,9 @@
                      </div>
                      <div class="col-xl-4 col-md-6" id="team-1">
                         <div class="card">
-                           <img src="/WEB/WEB - PROJECT ER/img/pp.webp" class="card-img-top" alt="...">
+                           <img src="/WEB/WEB - PROJECT ER/img/teammembers/teammember9.jpeg" class="card-img-top" alt="...">
                               <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <a href="#" class="btn btn-primary">Go somewhere</a>
-                              </div>
-                        </div>
-                     </div>
-                     <div class="col-xl-4 col-md-6" id="team-1">
-                        <div class="card">
-                           <img src="/WEB/WEB - PROJECT ER/img/pp.webp" class="card-img-top" alt="...">
-                              <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <a href="#" class="btn btn-primary">Go somewhere</a>
-                              </div>
-                        </div>
-                     </div>
-                     <div class="col-xl-4 col-md-6" id="team-1">
-                        <div class="card">
-                           <img src="/WEB/WEB - PROJECT ER/img/pp.webp" class="card-img-top" alt="...">
-                              <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <a href="#" class="btn btn-primary">Go somewhere</a>
-                              </div>
-                        </div>
-                     </div>
-                     <div class="col-xl-4 col-md-6" id="team-1">
-                        <div class="card">
-                           <img src="/WEB/WEB - PROJECT ER/img/pp.webp" class="card-img-top" alt="...">
-                              <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <a href="#" class="btn btn-primary">Go somewhere</a>
-                              </div>
-                        </div>
-                     </div>
-                     <div class="col-xl-4 col-md-6" id="team-1">
-                        <div class="card">
-                           <img src="/WEB/WEB - PROJECT ER/img/pp.webp" class="card-img-top" alt="...">
-                              <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <a href="#" class="btn btn-primary">Go somewhere</a>
-                              </div>
-                        </div>
-                     </div>
-                     <div class="col-xl-4 col-md-6" id="team-1">
-                        <div class="card">
-                           <img src="/WEB/WEB - PROJECT ER/img/pp.webp" class="card-img-top" alt="...">
-                              <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
+                                <h5 class="card-title">Samira Zeba</h5>
                                 <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                                 <a href="#" class="btn btn-primary">Go somewhere</a>
                               </div>
@@ -215,15 +231,28 @@
       </div>
    </div>
 </div>
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
-<script type="text/javascript"></script>
-</div>
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
-<script type="text/javascript">
-	
-</script>
+
+<script>
+   // JavaScript to toggle the form visibility
+   document.getElementById('addMemberBtn').addEventListener('click', function() {
+       var form = document.getElementById('addMembersForm');
+       addMembersForm.style.display = addMembersForm.style.display = 'block';
+   });
+   
+   // Function to send email (pseudo-code, actual implementation will vary)
+   function sendEmail() {
+       var email = document.getElementById('emailAddress').value;
+       // Normally here you'd make an AJAX request or something similar
+       // For demo purposes, let's just show a success message
+       Swal.fire(
+           'Success!',
+           'Invitation sent to ' + email,
+           'success'
+       );
+   }
+   </script>
+   
+
 
 
 </div>
