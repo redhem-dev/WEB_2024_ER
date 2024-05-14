@@ -1,0 +1,1 @@
+var constants = {API_BASE_URL : "http://localhost:80/WEB/WEB-PROJECT ER/backend/"}
