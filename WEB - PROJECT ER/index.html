@@ -30,12 +30,19 @@
     <!-- spapp style -->
     <link rel="stylesheet" href="css/spapp.css" />
 
-    <!-- spapp scripts -->
-    <script src="js/jquery.min.js"></script>
-    <script src="js/jquery.spapp.min.js">
-    </script>
-    <script src="js/script.js"></script>
+   
 
+    <style>
+        .description-cell 
+        {
+            max-height: 70px;
+            overflow-y: auto;
+            white-space: nowrap;
+        }   
+    </style>
+
+
+    
     
     
     
@@ -163,28 +170,19 @@
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">John Doe</span>
                                 <img src="/WEB/WEB - PROJECT ER/img/pp.webp" class="img-fluid avatar-xxl rounded-circle" style="height: 40px; width: 40px;">
                             </a>
-                            <!-- Dropdown - User Information -->
-                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                                <a class="dropdown-item" href="#profilewithteamsection">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
                                 </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Settings
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Activity Log
-                                </a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                <a class="dropdown-item" href="#login">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
                                 </a>
                             </div>
                         </li>
+                        
 
                     </ul>
 
@@ -204,7 +202,9 @@
                         <section id="product" data-load="product.html"></section>
                         <section id="profile" data-load="profile.html"></section>
                         <section id="profilewithteamsection" data-load="profilewithteamsection.html"></section>
-                        
+                        <section id="login" data-load="login.html"></section>
+                        <section id="register" data-load="register.html"></section>
+                        <section id="forgot-password" data-load="forgot-password.html">
                     </main>
                 </section>
 
@@ -227,14 +227,36 @@
     </div>
     <!-- End of Page Wrapper -->
 
-    <script>
-        var app = $.spapp({
-          defaultView: "#home",
-          templateDir: "./views/",
-        });
-  
-        app.run();
+
+ <!-- spapp scripts -->
+
+    
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.spapp.min.js">
     </script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/jquery.validate.min.js"></script>
+    
+     
+    
+
+    
+    <script src="js/script.js"></script>
+    
+    
+
+    <script src="js/utils/rest_client.js"></script>
+    <script src="js/utils/constants.js"></script>
+    <script src="js/utils/form-validation.js"></script>
+    <script src="js/additional-methods.min.js"></script>
+
+    
+
+
+    
+    
+    
 
 
 </body>
