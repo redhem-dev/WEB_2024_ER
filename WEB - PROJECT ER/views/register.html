@@ -1,0 +1,109 @@
+<div class="container">
+
+    <div class="card o-hidden border-0 shadow-lg my-5">
+        <div class="card-body p-0">
+            <!-- Nested Row within Card Body -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="p-5">
+                        <div class="text-center">
+                            <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
+                        </div>
+                        <form id="register-form" class="user">
+                            <div class="form-group row">
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <input type="text" class="form-control form-control-user" id="first_name" name="first_name"
+                                        placeholder="First Name">
+                                </div>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control form-control-user" id="last_name" name="last_name"
+                                        placeholder="Last Name">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" class="form-control form-control-user" id="email" name="email"
+                                    placeholder="Email Address">
+                            </div>
+
+                            <div class="form-group">
+                                <input type="text" class="form-control form-control-user" id="phone" name="phone"
+                                    placeholder="Phone Number">
+                            </div>
+                            
+                            <div class="form-group row">
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <input type="password" class="form-control form-control-user"
+                                        id="password" name="password" placeholder="Password">
+                                </div>
+                                <div class="col-sm-6">
+                                    <input type="password" class="form-control form-control-user"
+                                        id="passwordconfirm" name="passwordconfirm" placeholder="Repeat Password">
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-user btn-block"  id="register-button" onclick="return validateRegisterForm()">
+                                Register Account
+                            </button>
+                            <hr>
+                            
+                        </form>
+                        <hr>
+                        <div class="text-center">
+                            <a class="small" href="#forgot-password">Forgot Password?</a>
+                        </div>
+                        <div class="text-center">
+                            <a class="small" href="#login">Already have an account? Login!</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+<script>
+    function validateForm() {
+        var firstName = document.getElementById("exampleFirstName").value;
+        var lastName = document.getElementById("exampleLastName").value;
+        var email = document.getElementById("exampleInputEmail").value;
+        var password = document.getElementById("exampleInputPassword").value;
+        var repeatPassword = document.getElementById("exampleRepeatPassword").value;
+
+        // Simple validation for demonstration (you can expand it as needed)
+        if (!firstName.trim()) {
+            console.error("First name is required.");
+            return false;
+        }
+
+        if (!lastName.trim()) {
+            console.error("Last name is required.");
+            return false;
+        }
+
+        if (!email.trim()) {
+            console.error("Email address is required.");
+            return false;
+        }
+
+        if (!password.trim()) {
+            console.error("Password is required.");
+            return false;
+        }
+
+        if (password !== repeatPassword) {
+            console.error("Passwords do not match.");
+            return false;
+        }
+
+        // Print form inputs to console
+        console.log("First Name:", firstName);
+        console.log("Last Name:", lastName);
+        console.log("Email:", email);
+        console.log("Password:", password);
+
+        // Prevent form submission (default action)
+        return false;
+    }
+</script>

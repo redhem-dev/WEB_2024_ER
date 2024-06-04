@@ -1,94 +1,243 @@
 
-//Inventory script
-document.addEventListener("DOMContentLoaded", function () {
-    // Fetch data from JSON file
-    fetch("../WEB - PROJECT ER//json/inventory.json")
-        .then(response => response.json())
-        .then(data => {
-            const tableBody = document.getElementById('productTableBody');
-        
-            // Loop through each product in the JSON data
-            data.Inventory.forEach(product => {
-                const newRow = tableBody.insertRow(); // Insert a new row into the table
-            
-                // Loop through each property of the product
-                Object.entries(product).forEach(([key, value]) => {
-                    const cell = newRow.insertCell(); // Insert a new cell into the row
-                
-                    if (key === 'Picture') {
-                        // Create an <img> element for the picture
-                        const img = document.createElement('img');
-                        img.src = value; // Set the src attribute to the image link
-                        img.alt = product.ProductName; // Set alt text for accessibility
-                        img.width = 70; // Set width (adjust as needed)
-                        img.height = 70; // Set height (adjust as needed)
-                        cell.appendChild(img); // Append the <img> element to the cell
-                    } else {
-                        // For non-picture attributes, display the value as text
-                        cell.textContent = value;
-                    }
-                });
-            });
-        })
-        .catch(error => console.error('Error fetching data:', error));
+//Script for dropdown when clicking on profile
+   document.addEventListener('DOMContentLoaded', function() {
+    const dropdownToggle = document.querySelector('.nav-link.dropdown-toggle');
+    const dropdownMenu = document.querySelector('.dropdown-menu');
+    const dropdownItems = document.querySelectorAll('.dropdown-item');
+
+    dropdownToggle.addEventListener('click', function(event) {
+        event.preventDefault();
+        dropdownMenu.classList.toggle('show');
+    });
+
+    dropdownItems.forEach(function(item) {
+        item.addEventListener('click', function() {
+            dropdownMenu.classList.remove('show');
+        });
+    });
+
+    window.addEventListener('click', function(event) {
+        if (!dropdownToggle.contains(event.target) && !dropdownMenu.contains(event.target)) {
+            dropdownMenu.classList.remove('show');
+        }
+    });
 });
+
+
+//Spapp initialization
+var app = $.spapp({
+    defaultView: "#home",
+    templateDir: "./views/",
+    
+  });
+
+//Inventory route initialization  
+app.route({
+    view: "inventory",
+    load: "inventory.html",
+    onCreate: function () {
+        
+    },
+    onReady: function () {
+        
+        fetchProducts();
+    },
+  });
+
+//Dashboard scripts initialization
+app.route({
+    view: "home",
+    load: "home.html",
+    onCreate: function () {
+        
+    },
+    onReady: function () {
+
+        
+        fetchProductsOnDashboard();
+        fetchInventoryHistoryDashboard();
+    },
+  });
+  
+//Check Availability Script initialization
+app.route({
+    view: "checkavailability",
+    load: "checkavailability.html",
+    onCreate: function () {},
+    onReady: function () {
+        fetchProductsCheckAvailability();
+    },
+});
+
+//Inventory History initialization
+app.route({
+    view: "inventoryhistory",
+    load: "inventoryhistory.html",
+    onCreate: function () {},
+    onReady: function () {
+        fetchInventoryHistory();
+    }
+})
+
+//Removing the product initialization
+app.route({
+    view: "outgoingshipment",
+    load: "outgoingshipment.html",
+    onCreate: function () {},
+    onReady: function () {
+    }
+})
+
+//Dashboard inventory script (NEW)
+function fetchProductsOnDashboard() {
+    RestClient.get("products", function(response) {
+        var tableBody = $('#dashboardDataTableBody');
+
+        // Limit the response to the first 5 items
+        response.slice(0, 5).forEach(function(item) {
+            var row = $('<tr>');
+            row.append($('<td>').text(item['id']));
+            row.append($('<td>').text(item['name']));
+            row.append($('<td>').text(item['quantity']));
+            tableBody.append(row);
+        });
+    });
+}
+
+//Inventory script (NEW)
+function fetchProducts() {
+    RestClient.get("products", function(response) {
+        var tableBody = $('#productTableBody');
+
+
+        response.forEach(function(item) {
+            var row = $('<tr>');
+            row.append($('<td>').text(item['id']));
+            row.append($('<td>').text(item['name']));
+            row.append($('<td>').html('<img src="' + item['picture'] + '" alt="Product Image" width = "70" height="70"/>'));
+            row.append($('<td>').text(item['category']));
+            row.append($('<td>').text(item['brand']));
+            row.append($('<td>').text(item['price']));
+            row.append($('<td>').text(item['quantity']));
+            row.append($('<td>').text(item['release_date']));
+            row.append($('<td>').text(item['warranty_duration']));
+            row.append($('<td class="description-cell">').text(item['description']));
+            tableBody.append(row);
+        });
+    });
+
+}
+
+//Check Availability script
+function fetchProductsCheckAvailability() {
+    RestClient.get("products", function(data) {
+        var tableBody = $('#checkAvailabilityTableBody');
+        
+            
+            data.forEach(function(item) {
+                var row = $('<tr>');
+                row.append($('<td>').text(item['id']));
+                row.append($('<td>').text(item['name']));
+                row.append($('<td>').html('<img src="' + item['picture'] + '" alt="Product Image" width = "70" height="70"/>'));
+                row.append($('<td>').text(item['category']));
+                row.append($('<td>').text(item['brand']));
+                row.append($('<td>').text(item['price']));
+                row.append($('<td>').text(item['quantity']));
+                
+                // Create 'available' value based on 'quantity'
+                var available = item['quantity'] > 0 ? 'YES' : 'NO';
+                var color = item['quantity'] > 0 ? 'green' : 'red';
+                row.append($('<td>').html('<span style="color:' + color + ';">' + available + '</span>'));
+                
+                row.append($('<td class="description-cell">').text(item['description']));
+                tableBody.append(row);
+            });
+    });
+}
+
+// Script for validation of register form POPRAVITI, NE RADI!!!
+validateRegisterForm = function() {
+    FormValidation.validate('#register-form', {}, function(data) {
+        RestClient.post('users', data, function(response) {
+            console.log('User registered successfully:', response);
+            alert('User registered successfully!');
+            
+        });
+
+    });
+}
+
+// Script for validation of new product form
+validateNewProductForm = function() {
+    FormValidation.validate('#newProductForm', {}, function(data) {
+        RestClient.post('products', data, function(response) {
+            console.log('Product added successfully:', response);
+            alert('Product added successfully!');
+        });
+    });
+}
+
+/*Script for validation of deleting product
+validateDeleteProduct = function() {
+ 
+        
+        RestClient.delete('products', data, function(response) {
+            console.log('Product deleted successfully:', response);
+            alert('Product deleted successfully!');
+        });
+    
+
+
+}*/
+
 
 
 //Inventory History script 
-document.addEventListener("DOMContentLoaded", function () {
-    fetch("../WEB - PROJECT ER//json/inventoryhistory.json")
-        .then(response => response.json())
-        .then(data => {
-            const tableBody = document.getElementById('inventoryHistoryTableBody');
+function fetchInventoryHistory() {
+    RestClient.get("updates", function(response) {
+        var tableBody = $('#inventoryHistoryTableBody');
+        console.log(response);
 
-            data['Inventory History'].forEach(item => {
-                const newRow = tableBody.insertRow();
+        response.forEach(function(item) {
+            var row = $('<tr>');
+            row.append($('<td>').text(item['id']));
+            row.append($('<td>').text(item['user_id']));
+            row.append($('<td>').text(item['product_id']));
+            row.append($('<td>').text(item['date_time']));
+            row.append($('<td>').text(item['reason_for_updating']));
+            tableBody.append(row);
+        });
+    });
+}
 
-                Object.values(item).forEach(value => {
-                    const cell = newRow.insertCell();
-                    // Check if the value is for the Picture column
-                    if (value.startsWith('img/')) {
-                        const img = document.createElement('img');
-                        img.src = value;
-                        img.alt = 'Product Image';
-                        img.width = 70;
-                        img.height = 70;
-                        cell.appendChild(img);
-                    } else {
-                        cell.textContent = value;
-                    }
-                });
-            });
-        })
-        .catch(error => console.error('Error fetching data:', error));
-});
+//Short Inventory History script -- DASHBOARD
+function fetchInventoryHistoryDashboard() {
+    RestClient.get("updates", function(response) {
+        var tableBody = $('#historyTableBody');
+        console.log(response);
 
-//Short Inventory script -- DASHBOARD
-document.addEventListener("DOMContentLoaded", function() {
-    // Fetch data from JSON file
-    fetch("../WEB - PROJECT ER//json/inventory.json")
-        .then(response => response.json())
-        .then(data => {
-            const tableBody = document.getElementById('dataTableBody'); // Get the table body element
-            const limit = 5; // Limit the number of products to 5
+        response.slice(0, 5).forEach(function(item) {
+            var row = $('<tr>');
+            row.append($('<td>').text(item['id']));
+            row.append($('<td>').text(item['product_id']));
+            row.append($('<td>').text(item['date_time']));
+            tableBody.append(row);
+        });
+    });
+}
 
-            // Loop through each product in the JSON data, up to the limit
-            data.Inventory.slice(0, limit).forEach(product => {
-                const newRow = tableBody.insertRow(); // Insert a new row into the table
 
-                // Create cells for ProductID, ProductName, and StockQuantity
-                const productIdCell = newRow.insertCell(); 
-                productIdCell.textContent = product.ProductID;
 
-                const productNameCell = newRow.insertCell(); 
-                productNameCell.textContent = product.ProductName;
 
-                const stockQuantityCell = newRow.insertCell(); 
-                stockQuantityCell.textContent = product.StockQuantity;
-            });
-        })
-        .catch(error => console.error('Error fetching data:', error));
-});
+app.run();
+
+
+
+
+/*
+
+
+/*
 
 //Short Inventory History script -- DASHBOARD
 document.addEventListener("DOMContentLoaded", function () {
@@ -116,27 +265,10 @@ document.addEventListener("DOMContentLoaded", function () {
         .catch(error => console.error('Error fetching inventory history data:', error));
 });
 
+
+
 //Script for validation of updating product
 
-document.getElementById('updateForm').addEventListener('submit', function(event) {
-    event.preventDefault(); // Prevent form submission
-
-    // Fetch input values
-    const productID = document.getElementById('productID').value;
-    const confirmProductID = document.getElementById('confirmProductID').value;
-    const category = document.getElementById('category').value;
-    const shipmentUnits = document.getElementById('shipmentUnits').value;
-    const reason = document.getElementById('reason').value;
-
-    // Log inputs to console
-    console.log('Product ID:', productID);
-    console.log('Confirm Product ID:', confirmProductID);
-    console.log('Category:', category);
-    console.log('Number of units in shipment:', shipmentUnits);
-    console.log('Reason for updating:', reason);
-
-    // You can add your validation logic here
-});
 
 
 //Script for toggling between updating stock and adding new product
@@ -192,7 +324,8 @@ document.getElementById('fileInput').addEventListener('change', function() {
     }
 });
 
-/*
+
+
 //Script for validation of form submission when reducing quantity
 document.getElementById('shipmentForm').addEventListener('submit', function(event) {
     event.preventDefault(); // Prevent form submission
@@ -249,18 +382,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-//Script for toggling between removing product and decreasing quantity
-document.getElementById('toggleNewProduct').addEventListener('change', function() {
-    if (!this.checked) {
-        
-        
-        document.getElementById('removingProduct').style.display = 'none';
-        document.getElementById('decreasingProductQuantity').style.display = 'block';
 
-                   
 
-    } else {
-        document.getElementById('decreasingProductQuantity').style.display = 'none';
-        document.getElementById('removingProduct').style.display = 'block';
-    }
-});*/
+*/

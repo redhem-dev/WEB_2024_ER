@@ -2,11 +2,18 @@
 
 require 'vendor/autoload.php';
 
-Flight::route('/', function () {
-    echo password_hash('edhem', PASSWORD_DEFAULT);
+Flight::route('/', function(){
+    echo 'Hello world!';
 });
 
-require 'rest/routes/products_routes.class.php';
+
+
+require 'rest/routes/products_routes.php';
+require 'rest/routes/team_member_routes.php';
+require 'rest/routes/teamusers_routes.php';
+require 'rest/routes/update_routes.php';
+require 'rest/routes/auth_routes.php';
+
 
 
 Flight::start();

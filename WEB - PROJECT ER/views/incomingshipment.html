@@ -60,14 +60,10 @@
                             <input type="text" class="form-control" id="productID" name="productID" placeholder="ID of a product to be updated">
                             <br>
                         </div>
+                        
                         <div class="col-12">
-                            <label for="confirmProductID" class="form-label">Confirm Product ID</label>
-                            <input type="text" class="form-control" id="confirmProductID" name="confirmProductID" placeholder="Same ID as in previous field">
-                            <br>
-                        </div>
-                        <div class="col-12">
-                            <label for="shipmentUnits" class="form-label">Number of units in shipment</label>
-                            <input type="text" class="form-control" id="shipmentUnits" name="shipmentUnits" placeholder="50">
+                            <label for="shipmentUnits" class="form-label">New Quantity</label>
+                            <input type="text" class="form-control" id="newQuantity" name="newQuantity" placeholder="50">
                             <br>
                         </div>
                         <div class="col-12">
@@ -85,8 +81,8 @@
                         
                         
                         <div class="col-12">
-                            <label for="productName" class="form-label">Product Name</label>
-                            <input type="text" class="form-control" id="productName" name="productName" placeholder="Galaxy S22">
+                            <label for="name" class="form-label">Product Name</label>
+                            <input type="text" class="form-control" id="name" name="name" placeholder="Galaxy S22">
                             <br>
                         </div>
                         <div class="col-12">
@@ -101,14 +97,10 @@
                             <input type="text" class="form-control" id="brand" name="brand" placeholder="Samsung">
                             <br>
                         </div>
-                        <div class="col-12">
-                            <label for="model" class="form-label">Model</label>
-                            <input type="text" class="form-control" id="model" name="model" placeholder="Samsung Galaxy S22">
-                            <br>
-                        </div>
+                        
                         <div class="col-12">
                             <label for="price" class="form-label">Price</label>
-                            <input type="text" class="form-control" id="price" name="price" placeholder="999$">
+                            <input type="text" class="form-control" id="price" name="price" placeholder="999">
                             <br>
                         </div>
                         <div class="col-12">
@@ -117,13 +109,13 @@
                             <br>
                         </div>
                         <div class="col-12">
-                            <label for="releaseDate" class="form-label">Release Date</label>
-                            <input type="text" class="form-control" id="releaseDate" name="releaseDate" placeholder="19.9.2023.">
+                            <label for="release_date" class="form-label">Release Date</label>
+                            <input type="text" class="form-control" id="release_date" name="release_date" placeholder="19.9.2023.">
                             <br>
                         </div>
                         <div class="col-12">
-                            <label for="warrantyDuration" class="form-label">Warranty Duration</label>
-                            <input type="text" class="form-control" id="warrantyDuration" name="warrantyDuration" placeholder="3 years">
+                            <label for="warranty_duration" class="form-label">Warranty Duration</label>
+                            <input type="text" class="form-control" id="warranty_duration" name="warranty_duration" placeholder="3 years">
                             <br>
                         </div>
                         <div class="col-12">
@@ -133,19 +125,10 @@
                         </div>
 
                         
-                        <div class="col-12">
-                            <label for="fileInput" class="form-label">Upload Picture</label>
-                            <div class="file-upload-wrapper" style="position: relative;">
-                                <button type="button" class="btn btn-primary col-md-12" id="uploadButton">Choose File</button>
-                                <input type="file" class="form-control" id="fileInput" name="fileInput" accept=".png" style="display: none;">
-                                <span id="fileName" style="display: block; margin-top: 10px;">No file selected</span>
-
-                            </div>
-                            <br>
-                        </div>
+                        
                         
                         <div class="col-12">
-                            <button type="submit" class="btn btn-primary">Update</button>
+                            <button type="submit" class="btn btn-primary" onclick="return validateNewProductForm()">Add Product</button>
                         </div>
                     </form>
             
@@ -155,118 +138,12 @@
         </div>
 
     </div>
-    <div class="card shadow mb-4">
-        <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Updated products</h6>
-        </div>
-        <div class="card-body">
-            <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                    <thead>
-                        <tr>
-                          <th>ProductID</th>
-                          <th>ProductName</th>
-                          <th>Picture</th>
-                          <th>Category</th>
-                          <th>Brand</th>
-                          <th>Model</th>
-                          <th>Price</th>
-                          <th>StockQuantity</th>
-                          <th>ReleaseDate</th>
-                          <th>WarrantyDuration</th>
-                          <th>Description</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <!-- Product 1001 -->
-                        <tr>
-                          <td>1001</td>
-                          <td>Smart TV 4K</td>
-                          <td><img src="/WEB/WEB - PROJECT ER/img/products/shoes/Brooks Ghost 13.avif" alt="Smart TV 4K" width="70" height="70"></td>
-                          <td>Television</td>
-                          <td>Samsung</td>
-                          <td>QLED 55-inch</td>
-                          <td>$799.99</td>
-                          <td>50</td>
-                          <td>2023-01-15</td>
-                          <td>2 years</td>
-                          <td>4K UHD, Smart TV with voice control</td>
-                        </tr>
-                        
-                        
-                        <tr>
-                            <td>1004</td>
-                            <td>Gaming Console</td>
-                            <td><img src="img/ps5.jpeg" alt="Gaming Console" width="70" height="70"></td>
-                            <td>Gaming</td>
-                            <td>Sony</td>
-                            <td>PlayStation 5</td>
-                            <td>$499.99</td>
-                            <td>20</td>
-                            <td>2020-11-12</td>
-                            <td>1 year</td>
-                            <td>4K gaming, Ultra HD Blu-ray</td>
-                        </tr>
-                        
-                        <tr>
-                            <td>1006</td>
-                            <td>Digital Camera</td>
-                            <td><img src="img/nikoncamera.jpeg" alt="Digital Camera" width="70" height="70"></td>
-                            <td>Photography</td>
-                            <td>Nikon</td>
-                            <td>D850</td>
-                            <td>$2499.99</td>
-                            <td>15</td>
-                            <td>2021-05-20</td>
-                            <td>2 years</td>
-                            <td>45.7MP, 4K UHD recording</td>
-                        </tr>
-
-                        <tr>
-                            <td>1002</td>
-                            <td>Laptop - Ultrabook</td>
-                            <td><img src="img/dell_ultrabook.webp" alt="Laptop - Ultrabook" width="70" height="70"></td>
-                            <td>Laptop</td>
-                            <td>Dell</td>
-                            <td>XPS 13</td>
-                            <td>$1299.99</td>
-                            <td>30</td>
-                            <td>2023-02-10</td>
-                            <td>1 year</td>
-                            <td>13-inch, Core i7, 16GB RAM, 512GB SSD</td>
-                        </tr>
-                        
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
+    
 
     
 </div>
 
-<!-- Script for validation of updating product -->
-<script>
-document.getElementById('updateForm').addEventListener('submit', function(event) {
-    event.preventDefault(); // Prevent form submission
 
-    // Fetch input values
-    const productID = document.getElementById('productID').value;
-    const confirmProductID = document.getElementById('confirmProductID').value;
-    const category = document.getElementById('category').value;
-    const shipmentUnits = document.getElementById('shipmentUnits').value;
-    const reason = document.getElementById('reason').value;
-
-    // Log inputs to console
-    console.log('Product ID:', productID);
-    console.log('Confirm Product ID:', confirmProductID);
-    console.log('Category:', category);
-    console.log('Number of units in shipment:', shipmentUnits);
-    console.log('Reason for updating:', reason);
-
-    // You can add your validation logic here
-});
-</script>
 
 <!-- Script for toggling between the two forms -->
 <script>
@@ -286,48 +163,34 @@ document.getElementById('updateForm').addEventListener('submit', function(event)
     });
 </script>
 
-
-<!-- Script for validation of new product form -->
+<!-- Script for updating products-->
 <script>
-    document.getElementById('newProductForm').addEventListener('submit', function(event) {
-    event.preventDefault();  // Prevent the form from submitting to see the console output
+    window.onload = function() {
+        document.getElementById('stockForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+    
+            var id = document.getElementById('id');
+            if (!id) {
+                console.error('Error: id element not found');
+                return;
+            }
+    
+            var data = {
+                // Add the fields of the product you want to update here
+                // For example:
+                // name: document.getElementById('name').value,
+                // price: document.getElementById('price').value
+                quantity: document.getElementById('quantity').value,
+            };
+    
+            RestClient.put('products/' + id.value, data, function(response) {
+                console.log('Product updated');
+            }, function(jqXHR) {
+                console.error('Error: ' + jqXHR.statusText);
+            });
+        });
+    };
+    </script>
 
-    // Log each field value to check what we receive
-    console.log('Product Name:', document.getElementById('productName').value);
-    console.log('Category:', document.getElementById('category').value);
-    console.log('Brand:', document.getElementById('brand').value);
-    console.log('Model:', document.getElementById('model').value);
-    console.log('Price:', document.getElementById('price').value);
-    console.log('Quantity:', document.getElementById('quantity').value);
-    console.log('Release Date:', document.getElementById('releaseDate').value);
-    console.log('Warranty Duration:', document.getElementById('warrantyDuration').value);
-    console.log('Description:', document.getElementById('description').value);
-    const fileInput = document.getElementById('fileInput').files;
-    console.log('File selected:', fileInput.length > 0 ? fileInput[0].name : 'No file selected');
 
-    // Check if any input is empty
-    if (!document.getElementById('productName').value || !document.getElementById('category').value || !document.getElementById('brand').value || !document.getElementById('model').value || !document.getElementById('price').value || !document.getElementById('quantity').value || !document.getElementById('releaseDate').value || !document.getElementById('warrantyDuration').value || !document.getElementById('description').value || fileInput.length === 0) {
-        console.log('Please fill all fields.');
-        return;
-    }
-});
 
-</script>
-  
-<!-- Script for file upload, picture for the new product form-->
-<script>
-
-document.getElementById('uploadButton').addEventListener('click', function() {
-    document.getElementById('fileInput').click();  // Trigger the hidden file input click
-});
-
-document.getElementById('fileInput').addEventListener('change', function() {
-    const fileNameDisplay = document.getElementById('fileName');
-    if (this.files.length > 0) {
-        fileNameDisplay.textContent = this.files[0].name;  // Update the text to show the file name
-    } else {
-        fileNameDisplay.textContent = 'No file selected';  // Reset if no file is selected
-    }
-});
-
-</script>

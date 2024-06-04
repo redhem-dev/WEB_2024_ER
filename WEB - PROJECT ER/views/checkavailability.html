@@ -4,17 +4,7 @@
     <div class="d-flex align-items-start justify-content-between mb-4">
         <h1 class="h3 mb-2 text-gray-800">All products, all categories, in stock and not in stock</h1>
     
-        <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" >
-            <div class="input-group" style="text-align: right;">
-                <input type="text" class="form-control bg-light border-0 small" placeholder="Search for product..."
-                    aria-label="Search" aria-describedby="basic-addon2">
-                <div class="input-group-append">
-                    <button class="btn btn-primary" type="button">
-                        <i class="fas fa-search fa-sm"></i>
-                    </button>
-                </div>
-            </div>
-        </form>
+        
     
     
     </div>
@@ -27,108 +17,22 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <table class="table table-bordered" id="checkAvailabilityDataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
                           <th>ProductID</th>
-                          <th>ProductName</th>
+                          <th>Product Name</th>
                           <th>Picture</th>
                           <th>Category</th>
                           <th>Brand</th>
-                          <th>Model</th>
                           <th>Price</th>
-                          <th>StockQuantity</th>
+                          <th>Quantity</th>
                           <th>Available</th>
                           <th>Description</th>
-                          
                         </tr>
                       </thead>
-                      <tbody>
+                      <tbody id="checkAvailabilityTableBody">
                         <!-- Product 1001 -->
-                        <tr>
-                          <td>1001</td>
-                          <td>Smart TV 4K</td>
-                          <td><img src="img/samsungtv4k.webp" alt="Smart TV 4K" width="70" height="70"></td>
-                          <td>Television</td>
-                          <td>Samsung</td>
-                          <td>QLED 55-inch</td>
-                          <td>$799.99</td>
-                          <td>99</td>
-                          <td style="color: green;">YES</td>
-                          <td>4K UHD, Smart TV with voice control</td>
-                        </tr>
-                        <tr>
-                            <td>1002</td>
-                            <td>Laptop - Ultrabook</td>
-                            <td><img src="img/dell_ultrabook.webp" alt="Laptop - Ultrabook" width="70" height="70"></td>
-                            <td>Laptop</td>
-                            <td>Dell</td>
-                            <td>XPS 13</td>
-                            <td>$1299.99</td>
-                            <td>79</td>
-                            <td style="color: green;">YES</td>
-                            <td>13-inch, Core i7, 16GB RAM, 512GB SSD</td>
-                        </tr>
-                        <tr>
-                            <td>1003</td>
-                            <td>Smartphone - Flagship</td>
-                            <td><img src="img/iphone13.webp" alt="Smartphone - Flagship" width="70" height="70"></td>
-                            <td>Smartphone</td>
-                            <td>Apple</td>
-                            <td>iPhone 13</td>
-                            <td>$999.99</td>
-                            <td>9</td>
-                            <td style="color: green;">YES</td>
-                            <td>128GB, iOS 15, A15 Bionic chip</td>
-                        </tr>
-                        <tr>
-                            <td>1004</td>
-                            <td>Gaming Console</td>
-                            <td><img src="img/ps5.jpeg" alt="Gaming Console" width="70" height="70"></td>
-                            <td>Gaming</td>
-                            <td>Sony</td>
-                            <td>PlayStation 5</td>
-                            <td>$499.99</td>
-                            <td>0</td>
-                            <td style="color: red;">NO</td>
-                            <td>4K gaming, Ultra HD Blu-ray</td>
-                        </tr>
-                        <tr>
-                            <td>1005</td>
-                            <td>Wireless Earbuds</td>
-                            <td><img src="img/appleairpodspro.jpeg" alt="Wireless Earbuds" width="70" height="70"></td>
-                            <td>Audio</td>
-                            <td>Apple</td>
-                            <td>AirPods Pro</td>
-                            <td>$249.99</td>
-                            <td>0</td>
-                            <td style="color: red;">NO</td>
-                            <td>Active Noise Cancellation, Sweat and water-resistant</td>
-                        </tr>
-                        <tr>
-                            <td>1006</td>
-                            <td>Digital Camera</td>
-                            <td><img src="img/nikoncamera.jpeg" alt="Digital Camera" width="70" height="70"></td>
-                            <td>Photography</td>
-                            <td>Nikon</td>
-                            <td>D850</td>
-                            <td>$2499.99</td>
-                            <td>87</td>
-                            <td style="color: green;">YES</td>
-                            <td>45.7MP, 4K UHD recording</td>
-                        </tr>
-                        <tr>
-                            <td>1007</td>
-                            <td>Robot Vacuum</td>
-                            <td><img src="img/irobotvacum.jpeg" alt="Robot Vacuum" width="70" height="70"></td>
-                            <td>Home Appliances</td>
-                            <td>iRobot</td>
-                            <td>Roomba i7+</td>
-                            <td>$179.99</td>
-                            <td>0</td>
-                            <td style="color: red;">NO</td>
-                            <td>Smart mapping, automatic dirt disposal</td>
-                        </tr>  
                     </tbody>
                 </table>
             </div>
