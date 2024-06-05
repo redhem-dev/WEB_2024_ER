@@ -2,7 +2,13 @@
 
 require __DIR__ . '/../../../vendor/autoload.php';
 
-define('BASE_URL', 'http://localhost:8888/WEB/WEB - PROJECT ER/backend/');
+if($_SERVER['SERVER_NAME'] == 'localhost' || $_SERVER['SERVER_NAME'] == '127.0.0.1') {
+    define('BASE_URL', 'http://localhost/WEB/WEB - PROJECT ER/backend/');
+}
+else {
+    define('BASE_URL', 'https://lionfish-app-acggi.ondigitalocean.app//backend/');
+
+}
 
 error_reporting(0);
 
