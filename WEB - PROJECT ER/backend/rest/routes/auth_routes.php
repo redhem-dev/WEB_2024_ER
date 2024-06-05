@@ -6,6 +6,8 @@ require_once __DIR__ . '/../services/auth_service.class.php';
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 
+Flight::set('auth_service', new AuthService());
+
 
 Flight::route('POST /login', function() {
     $payload = Flight::request()->data->getData();

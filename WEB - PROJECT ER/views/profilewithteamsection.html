@@ -1,56 +1,54 @@
 <div class="container">
    <div class="row">
-      <div class="col-xl-8">
+      <div class="col-xl-12">
          <div class="card">
             <div class="card-body pb-4">
                <div class="row align-items-center">
-                  <div class="col-md-3">
-                     <div class="text-center border-end">
-                        <img src="/WEB/WEB - PROJECT ER/img/pp.webp" class="img-fluid avatar-xxl rounded-circle">
-                        <h4 class="text-primary font-size-20 mt-3 mb-2">John Doe</h4>
-                        
-                     </div>
+                  <div class="col-md-6">
+                      <div class="text-center border-end" id="user-data-container">
+                          <img src="/WEB/WEB%20-%20PROJECT%20ER/img/ppicon.jpeg" class="img-fluid avatar-xxl rounded-circle">
+                          <h4 class="text-primary font-size-20 mt-3 mb-2" id="user-from-local-storage">John Doe</h4>
+                      </div>
                   </div>
-                  <div class="col-md-9">
-                     <div class="ms-3">
-                        
-                        <div class="row my-4">
-                           <div class="col-md-12">
-                              <div>
-                                 <p class="text-muted mb-2 fw-medium"><i class="mdi mdi-email-outline me-2"></i>johndoe@ims.business.us</p>
-                                 <p class="text-muted fw-medium mb-0"><i class="mdi mdi-phone-in-talk-outline me-2"></i>418-955-4703</p>
+                  <div class="col-md-6">
+                      <div class="ms-3">
+                          <div class="row my-4">
+                              <div class="col-md-12" style="text-align: center;">
+                                  <div>
+                                      <p class="text-muted mb-2 fw-medium">
+                                          <i class="mdi mdi-email-outline me-2"></i>
+                                          <span id="email-from-local-storage">N/A</span>
+                                      </p>
+                                      <p class="text-muted fw-medium mb-0">
+                                          <span id="phone-from-local-storage">N/A</span>
+                                      </p>
+                                      <p class="text-muted fw-medium mb-0">
+                                          <span id="id-from-local-storage">N/A</span>
+                                      </p>
+                                  </div>
                               </div>
-                           </div>
-                        </div>
-                        
-                     </div>
+                          </div>
+                      </div>
                   </div>
-               </div>
+              </div>
+              
+              
             </div>
          </div>
          <div class="card">
-            <div class="tab-content p-4">
+            <div class="tab-content p-4"> 
                <div class="tab-pane active show" id="team-tab" role="tabpanel">
-                  <h4 class="card-title text-primary mb-3" style="color: black;">Team</h4>
+                  <h4 class="card-title text-primary mb-3" >Team</h4>
 
 
                   
 
 
                   
-                  <div class="row">
-                     
-                     <div class="col-xl-4 col-md-3" id="team-1">
-                        <div class="card">
-                           <img src="/WEB/WEB - PROJECT ER/img/teammembers/teammember2.avif" class="card-img-top" alt="...">
-                              <div class="card-body">
-                                <h5 class="card-title">Dino Mujkic</h5>
-                                <p class="card-text">ID</p>
-                                
-                              </div>
-                        </div>
-                     </div>
-                  </div>
+                  <div class="row" id="team-members-container">
+                     <!-- Cards will be dynamically inserted here -->
+                 </div>
+                 
                </div>
             </div>
          </div>
@@ -60,28 +58,99 @@
 </div>
 
 
-<!--Show the email label for adding new members-->
-<script>
-   // JavaScript to toggle the form visibility
-   document.getElementById('addMemberBtn').addEventListener('click', function() {
-       var form = document.getElementById('addMembersForm');
-       addMembersForm.style.display = addMembersForm.style.display = 'block';
-   });
-   
-   // Function to send email (pseudo-code, actual implementation will vary)
-   function sendEmail() {
-       var email = document.getElementById('emailAddress').value;
-       // Normally here you'd make an AJAX request or something similar
-       // For demo purposes, let's just show a success message
-       Swal.fire(
-           'Success!',
-           'Invitation sent to ' + email,
-           'success'
-       );
-   }
-</script>
+
    
 
 
 
 </div>
+
+<script>
+
+window.onload = function() {
+    const teamMembersContainer = document.querySelector('.row');
+
+    // Check if teamMembersContainer is found
+    if (!teamMembersContainer) {
+        console.error('Team members container not found');
+        return;
+    }
+
+    // List of possible image formats
+    const imageFormats = ['jpeg', 'webp', 'png', 'avif', 'jpg'];
+
+    // Function to create a card element for a team member
+    function createCard(firstName, id, index) {
+        const cardCol = document.createElement('div');
+        cardCol.classList.add('col-xl-3', 'col-md-4');
+
+        const card = document.createElement('div');
+        card.classList.add('card');
+
+        const img = document.createElement('img');
+        img.classList.add('card-img-top');
+        img.alt = "User Image";
+
+        // Attempt to load image in one of the available formats
+        let imageLoaded = false;
+        for (let format of imageFormats) {
+            const imageUrl = `/WEB/WEB%20-%20PROJECT%20ER/img/teammembers/teammember${index + 1}.${format}`;
+            const imgCheck = new Image();
+            imgCheck.onload = function() {
+                if (!imageLoaded) {
+                    img.src = imageUrl;
+                    imageLoaded = true;
+                }
+            };
+            imgCheck.onerror = function() {
+                console.error(`Image not found: ${imageUrl}`);
+            };
+            imgCheck.src = imageUrl;
+            if (imageLoaded) break;
+        }
+
+        const cardBody = document.createElement('div');
+        cardBody.classList.add('card-body');
+
+        const cardTitle = document.createElement('h5');
+        cardTitle.classList.add('card-title');
+        cardTitle.textContent = firstName;
+
+        const cardText = document.createElement('p');
+        cardText.classList.add('card-text');
+        cardText.textContent = `ID: ${id}`;
+
+        cardBody.appendChild(cardTitle);
+        cardBody.appendChild(cardText);
+        card.appendChild(img);
+        card.appendChild(cardBody);
+        cardCol.appendChild(card);
+
+        return cardCol;
+    }
+
+    // Function to populate team members
+    function populateTeamMembers(teamMembers) {
+        teamMembers.forEach((member, index) => {
+            const card = createCard(member.first_name, member.id, index);
+            teamMembersContainer.appendChild(card);
+        });
+    }
+
+    // Fetch team members from the Flight route
+    fetch('http://localhost:8888/WEB/WEB%20-%20PROJECT%20ER/backend/teammembers') 
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            populateTeamMembers(data);
+        })
+        .catch(error => {
+            console.error('Error fetching team members:', error);
+        });
+};
+</script>
+

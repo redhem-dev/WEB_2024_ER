@@ -53,17 +53,17 @@
                     </div>
 
                     <!--Form for updating product-->
-                    <form class="row g-3" id="stockForm">
+                    <form class="row g-3" id="stockForm" onsubmit="updateProduct(event)">
                         
                         <div class="col-12">
-                            <label for="productID" class="form-label">Product ID</label>
-                            <input type="text" class="form-control" id="productID" name="productID" placeholder="ID of a product to be updated">
+                            <label for="id" class="form-label">Product ID</label>
+                            <input type="text" class="form-control" id="id" name="id" placeholder="ID of a product to be updated">
                             <br>
                         </div>
                         
                         <div class="col-12">
-                            <label for="shipmentUnits" class="form-label">New Quantity</label>
-                            <input type="text" class="form-control" id="newQuantity" name="newQuantity" placeholder="50">
+                            <label for="quantity" class="form-label">New Quantity</label>
+                            <input type="text" class="form-control" id="quantity" name="quantity" placeholder="50">
                             <br>
                         </div>
                         <div class="col-12">
@@ -72,7 +72,7 @@
                             <br>
                         </div>
                         <div class="col-12">
-                            <button type="submit" class="btn btn-primary">Update</button>
+                            <button id="update-button" type="submit" class="btn btn-primary">Update</button>
                         </div>
                     </form>
                 
@@ -104,8 +104,8 @@
                             <br>
                         </div>
                         <div class="col-12">
-                            <label for="quantity" class="form-label">Quantity</label>
-                            <input type="text" class="form-control" id="quantity" name="quantity" placeholder="50">
+                            <label for="quantity1" class="form-label">Quantity</label>
+                            <input type="text" class="form-control" id="quantity1" name="quantity1" placeholder="50">
                             <br>
                         </div>
                         <div class="col-12">
@@ -165,31 +165,41 @@
 
 <!-- Script for updating products-->
 <script>
-    window.onload = function() {
-        document.getElementById('stockForm').addEventListener('submit', function(event) {
-            event.preventDefault();
+
+    function updateProduct(event) {
+    event.preventDefault();
     
-            var id = document.getElementById('id');
-            if (!id) {
-                console.error('Error: id element not found');
-                return;
-            }
-    
-            var data = {
-                // Add the fields of the product you want to update here
-                // For example:
-                // name: document.getElementById('name').value,
-                // price: document.getElementById('price').value
-                quantity: document.getElementById('quantity').value,
-            };
-    
-            RestClient.put('products/' + id.value, data, function(response) {
-                console.log('Product updated');
-            }, function(jqXHR) {
-                console.error('Error: ' + jqXHR.statusText);
-            });
-        });
-    };
+    const formData = new FormData(document.getElementById('stockForm'));
+    const data = {};
+    formData.forEach((value, key) => {
+        data[key] = value;
+    });
+
+    const productId = data.id;
+    const url = `http://localhost:8888/WEB/WEB - PROJECT ER/backend/products/${productId}`;
+
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Product updated', data);
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+
+
     </script>
 
 
