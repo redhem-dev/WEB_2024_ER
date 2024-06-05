@@ -17,19 +17,32 @@ Flight::route('/*', function(){
     if($req_method == 'GET' && $req_url == "/signup"){
         return TRUE;
     }
+    if($req_method == 'POST' && $req_url == "/signup"){
+        return TRUE;
+    }
     if($req_method == 'GET' && $req_url == "/products"){
         return TRUE;
-
     }
-    if($req_method == 'POST' && $req_url == "/users"){
+    if($req_method == 'GET' && $req_url == "/updates"){
         return TRUE;
     }
+    if($req_method == 'GET' && $req_url == "/teammembers"){
+        return TRUE;
+    }
+    if($req_method == 'POST' && $req_url == "/products"){
+        return TRUE;
+    }
+    if($req_method == 'POST' && $req_url == "/products/@id"){
+        return TRUE;
+    }
+
+
     try{
         $token = Flight::request()->getHeader('Authentication');
         if(!$token){
             Flight::halt(401, 'Token not provided');
         }
-        $decoded_token = JWT::decode($token, new Key( JWT_SECRET, 'HS256'));
+        $decoded_token = JWT::decode($token, new Key(JWT_SECRET, 'HS256'));
 
         Flight::set('user', $decoded_token->user->ID);
         Flight::set('jwt_token', $token);

@@ -2,7 +2,7 @@
 
 require __DIR__ . '/../../../vendor/autoload.php';
 
-define('BASE_URL', 'http://localhost/WEB/WEB - PROJECT ER/backend/');
+define('BASE_URL', 'http://localhost:8888/WEB/WEB - PROJECT ER/backend/');
 
 error_reporting(0);
 

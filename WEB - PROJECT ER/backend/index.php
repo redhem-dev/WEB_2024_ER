@@ -2,12 +2,12 @@
 
 require 'vendor/autoload.php';
 
-Flight::route('/', function(){
-    echo 'Hello world!';
-});
 
 
 
+//DODATI RUTU MIDLVERA
+
+// require 'rest/routes/middleware_routes.php';
 require 'rest/routes/products_routes.php';
 require 'rest/routes/team_member_routes.php';
 require 'rest/routes/teamusers_routes.php';

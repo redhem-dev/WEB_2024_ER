@@ -41,8 +41,12 @@ class ProductDao extends BaseDao
     }
 
 
-    public function updateProduct($product_id){
-        $this->execute("UPDATE products SET quantity = :quantity, WHERE id = :id", ["id" => $product_id]);
+    public function updateProduct($data){
+        $this->execute("UPDATE products SET quantity = :quantity  WHERE id = :id", [
+            "id" => $data['id'], 
+            "quantity" => $data["quantity"],
+            
+        ]);
     }
     
     

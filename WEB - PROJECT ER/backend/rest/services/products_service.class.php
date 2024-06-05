@@ -31,8 +31,8 @@ class ProductService{
         return $this->products_dao->deleteProduct($product_id);
     }
 
-    public function updateProduct($product_id){
-        return $this->products_dao->updateProduct($product_id);
+    public function updateProduct($data){
+        return $this->products_dao->updateProduct($data);
     }
 }
 
